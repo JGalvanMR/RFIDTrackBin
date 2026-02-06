@@ -794,7 +794,8 @@ namespace RFIDTrackBin.fragment
             {
                 using (SqlConnection thisConnection = new SqlConnection(MainActivity.cadenaConexion))
                 {
-                    using (SqlDataAdapter da = new SqlDataAdapter("select nombre from tb_man_cat_lineas where area_id in (SELECT AreaId FROM tb_cat_areas_trabajo where nombre in ('ENSALADAS', 'FRESCO', 'EDIFICIO', 'PATINES', 'LIMPIEZA')) ORDER BY nombre ASC", thisConnection))
+
+                    using (SqlDataAdapter da = new SqlDataAdapter("SELECT* FROM Tb_RFID_Areas WHERE UnidadNegocio = (SELECT UBICACION FROM Tb_RFID_Usuarios WHERE usuario = '" + ((MainActivity)Activity).usuario + "')", thisConnection))
                     {
                         ds.Clear(); // Asegúrate de limpiar el DataSet antes de llenarlo
                         da.Fill(ds, "areas");
@@ -807,7 +808,7 @@ namespace RFIDTrackBin.fragment
                 strFrutas[0] = "Seleccione un Area";
                 for (int i = 1; i <= areas.Rows.Count; i++)
                 {
-                    strFrutas[i] = areas.Rows[i - 1]["nombre"].ToString();
+                    strFrutas[i] = areas.Rows[i - 1]["NombreArea"].ToString();
                 }
 
                 var comboAdapter = new ArrayAdapter<string>(_activity, Android.Resource.Layout.SimpleSpinnerItem, strFrutas);
