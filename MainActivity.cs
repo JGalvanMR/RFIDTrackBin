@@ -85,6 +85,7 @@ namespace RFIDTrackBin
 
         #region VARIABLES HEREDADAS INTENT
         public string usuario = "";
+        public string ubicacion = "";
         #endregion
 
         #region RFID
@@ -157,6 +158,7 @@ namespace RFIDTrackBin
             BottomNavigation.SetOnNavigationItemSelectedListener(this);
 
             usuario = Intent.GetStringExtra("usuario") ?? "N/A"; // ← Recibes el valor
+            ubicacion = Intent.GetStringExtra("ubicacion");
             InitializeUI();
             CheckAndRequestPermissions();
 

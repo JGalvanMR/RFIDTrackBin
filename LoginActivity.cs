@@ -186,9 +186,16 @@ namespace RFIDTrackBin
 
                 if (responsable == "admin" && txtContrasena.Text == "1234" || getTb_RFID_Login(responsable, txtContrasena.Text))
                 {
+                    string ubicacion = "";
+                    if (responsable != "admin" && Tb_RFID_Usuarios != null)
+                    {
+                        ubicacion = Tb_RFID_Usuarios.Rows[0]["Ubicacion"].ToString();
+                    }
+
                     // Ir a MainActivity
                     var intent = new Intent(this, typeof(MainActivity));
-                    intent.PutExtra("usuario", responsable); // ← Envías el valor
+                    intent.PutExtra("usuario", responsable); // Envías el valor
+                    intent.PutExtra("ubicacion", ubicacion); // INDICA UNIDAD DE NEGOCIO
                     StartActivity(intent);
                     //Finish(); // Opcional, para que no puedan volver con el botón atrás
                 }
